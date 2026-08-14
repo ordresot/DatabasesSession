@@ -3,6 +3,7 @@
 
 Задача 1.1
 
+```sql
 SELECT v.maker, m.model
 FROM Motorcycle m
 JOIN Vehicle v ON m.model = v.model
@@ -10,9 +11,11 @@ WHERE m.horsepower > 150
   AND m.price < 20000
   AND m.type = 'Sport'
 ORDER BY m.horsepower DESC;
+```
 
 Задача 1.2
 
+```sql
 SELECT 
     v.maker,
     v.model,
@@ -53,9 +56,11 @@ WHERE b.gear_count > 18
   AND b.price < 4000.00
 
 ORDER BY horsepower DESC NULLS LAST;
+```
 
 Задача 2.1
 
+```sql
 WITH car_stats AS (
     SELECT 
         c.name,
@@ -81,9 +86,11 @@ SELECT
 FROM car_stats cs
 JOIN min_avg_per_class mac ON cs.class = mac.class AND cs.avg_position = mac.min_avg_position
 ORDER BY cs.avg_position;
+```
 
 Задача 2.2
 
+```sql
 WITH car_stats AS (
     SELECT 
         c.name,
@@ -106,9 +113,11 @@ FROM car_stats
 WHERE avg_position = (SELECT MIN(avg_position) FROM car_stats)
 ORDER BY name
 LIMIT 1;
+```
 
 Задача 2.3
 
+```sql
 WITH car_stats AS (
     SELECT 
         c.name,
@@ -157,9 +166,11 @@ FROM car_stats cs
 JOIN selected_classes sc ON cs.class = sc.class
 JOIN class_race_count crc ON cs.class = crc.class
 ORDER BY cs.class, cs.name;
+```
 
 Задача 2.4
 
+```sql
 WITH car_stats AS (
     SELECT 
         c.name,
@@ -191,9 +202,11 @@ FROM car_stats cs
 JOIN class_stats cls ON cs.class = cls.class
 WHERE cs.avg_position < cls.class_avg_position
 ORDER BY cs.class, cs.avg_position;
+```
 
 Задача 2.5
 
+```sql
 WITH car_stats AS (
     SELECT 
         c.name,
@@ -247,9 +260,11 @@ ORDER BY
     (SELECT low_performance_count FROM class_low_performance WHERE class = cs.class) DESC,
     cs.class,
     cs.avg_position;
+```
 
 Задача 3.1
 
+```sql
 WITH customer_bookings AS (
     SELECT 
         c.ID_customer,
@@ -276,9 +291,11 @@ SELECT
     ROUND(avg_stay_duration_days, 2) AS avg_stay_duration
 FROM customer_bookings
 ORDER BY total_bookings DESC;
+```
 
 Задача 3.2
 
+```sql
 WITH customer_spending AS (
     SELECT 
         c.ID_customer,
@@ -312,9 +329,11 @@ SELECT
 FROM qualified_customers
 WHERE total_spent > 500
 ORDER BY total_spent ASC;
+```
 
 Задача 3.3
 
+```sql
 WITH hotel_avg_prices AS (
     SELECT 
         h.ID_hotel,
@@ -369,9 +388,11 @@ SELECT
 FROM customer_category
 WHERE category_rank > 0
 ORDER BY category_rank ASC;
+```
 
 Задача 4.1
 
+```sql
 WITH RECURSIVE EmployeeHierarchy AS (
     SELECT 
         EmployeeID,
@@ -413,9 +434,11 @@ FROM EmployeeHierarchy eh
 LEFT JOIN Departments d ON eh.DepartmentID = d.DepartmentID
 LEFT JOIN Roles r ON eh.RoleID = r.RoleID
 ORDER BY eh.Name;
+```
 
 Задача 4.2
 
+```sql
 WITH RECURSIVE EmployeeHierarchy AS (
     SELECT 
         EmployeeID,
@@ -477,9 +500,11 @@ LEFT JOIN Roles r ON eh.RoleID = r.RoleID
 LEFT JOIN TaskCounts tc ON eh.EmployeeID = tc.AssignedTo
 LEFT JOIN SubordinateCounts sc ON eh.EmployeeID = sc.ManagerID
 ORDER BY eh.Name;
+```
 
 Задача 4.3
 
+```sql
 WITH RECURSIVE SubordinateHierarchy AS (
     SELECT 
         EmployeeID,
@@ -531,3 +556,4 @@ LEFT JOIN Roles r ON e.RoleID = r.RoleID
 LEFT JOIN SubordinateCounts sc ON e.EmployeeID = sc.ManagerID
 WHERE r.RoleName = 'Менеджер'
 ORDER BY e.Name;
+```
